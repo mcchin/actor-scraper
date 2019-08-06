@@ -1,7 +1,6 @@
 const Apify = require('apify');
 const _ = require('underscore');
 const fetch = require('@zeit/fetch-retry')(require('node-fetch'));
-const myCheerio = require('cheerio');
 
 const contentType = require('content-type');
 const {
@@ -309,6 +308,7 @@ class CrawlerSetup {
             const context = window[namespc].createContext(ctxOpts);
             
             context.cheerio = function(html) {
+                const myCheerio = require('cheerio');
                 return myCheerio.load(html, {
                     normalizeWhitespace: true,
                     xmlMode: true
