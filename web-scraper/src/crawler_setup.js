@@ -295,6 +295,7 @@ class CrawlerSetup {
                 response: {
                     status: response && response.status(),
                     headers: response && response.headers(),
+                    xxxg: 'ff'
                 },
             },
         };
