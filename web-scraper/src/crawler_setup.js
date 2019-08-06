@@ -289,13 +289,13 @@ class CrawlerSetup {
             ),
             browserHandles: pageContext.browserHandles,
             pageFunctionArguments: {
-                xxx: 'ggg',
-                xfetch: fetch,
                 request,
                 response: {
                     status: response && response.status(),
                     headers: response && response.headers(),
-                    xxxg: 'ff'
+                    cheerio,
+                    fetch,
+                    xxx: 'ggg'
                 },
             },
         };
