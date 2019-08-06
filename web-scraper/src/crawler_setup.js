@@ -1,7 +1,7 @@
 const Apify = require('apify');
 const _ = require('underscore');
 const fetch = require('@zeit/fetch-retry')(require('node-fetch'));
-const cheerio = require('cheerio');
+// const cheerio = require('cheerio');
 
 const contentType = require('content-type');
 const {
@@ -281,13 +281,13 @@ class CrawlerSetup {
         if (aborted) return;
 
         // Setup Context and pass the configuration down to Browser.
-        let $cheerio = '';
-        if ( this.input.RSS && response && response.text() ) {
-            $cheerio = cheerio.load(response.text(), {
-                normalizeWhitespace: true,
-                xmlMode: true
-            });
-        }
+        // let $cheerio = '';
+        // if ( this.input.RSS && response && response.text() ) {
+        //     $cheerio = cheerio.load(response.text(), {
+        //         normalizeWhitespace: true,
+        //         xmlMode: true
+        //     });
+        // }
 
         const contextOptions = {
             crawlerSetup: Object.assign(
@@ -301,14 +301,15 @@ class CrawlerSetup {
                 response: {
                     status: response && response.status(),
                     headers: response && response.headers(),
+                    raw: response && response.text(),
                 },
             },
         };
 
-        const extras = {
-            $cheerio,
-            fetch
-        };
+        // const extras = {
+        //     $cheerio,
+        //     fetch
+        // };
 
         /**
          * USER FUNCTION EXECUTION
@@ -317,10 +318,9 @@ class CrawlerSetup {
         const startUserFn = process.hrtime();
 
         const namespace = pageContext.apifyNamespace;
-        const output = await page.evaluate(async (ctxOpts, namespc, ext) => {
+        const output = await page.evaluate(async (ctxOpts, namespc) => {
             /* eslint-disable no-shadow */
             const context = window[namespc].createContext(ctxOpts);
-            context.extras = ext;
 
             const output = {};
             try {
@@ -353,7 +353,7 @@ class CrawlerSetup {
             }
 
             return replaceAllDatesInObjectWithISOStrings(output);
-        }, contextOptions, namespace, extras);
+        }, contextOptions, namespace);
 
         tools.logPerformance(request, 'handlePageFunction USER FUNCTION', startUserFn);
         const finishUserFn = process.hrtime();
