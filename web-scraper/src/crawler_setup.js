@@ -13,7 +13,7 @@ const {
 const GlobalStore = require('./global_store');
 const createBundle = require('./bundle.browser');
 const SCHEMA = require('../INPUT_SCHEMA');
-
+const xxx = 'xxx';
 const { utils: { log, puppeteer } } = Apify;
 
 /**
@@ -270,7 +270,7 @@ class CrawlerSetup {
         const start = process.hrtime();
 
         const pageContext = this.pageContexts.get(page);
-
+        const zzz = 'zzz';
         /**
          * PRE-PROCESSING
          */
@@ -287,8 +287,6 @@ class CrawlerSetup {
             crawlerSetup: Object.assign(
                 _.pick(this, ['rawInput', 'env']),
                 _.pick(this.input, ['customData', 'useRequestQueue', 'injectJQuery', 'injectUnderscore']),
-                { fetch },
-                { cheerio },
                 { META_KEY },
             ),
             browserHandles: pageContext.browserHandles,
