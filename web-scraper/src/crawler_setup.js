@@ -287,7 +287,8 @@ class CrawlerSetup {
                 normalizeWhitespace: true,
                 xmlMode: true
             });
-        }        
+        }
+
         const contextOptions = {
             crawlerSetup: Object.assign(
                 _.pick(this, ['rawInput', 'env']),
@@ -316,10 +317,10 @@ class CrawlerSetup {
         const startUserFn = process.hrtime();
 
         const namespace = pageContext.apifyNamespace;
-        const output = await page.evaluate(async (ctxOpts, namespc, extras) => {
+        const output = await page.evaluate(async (ctxOpts, namespc, ext) => {
             /* eslint-disable no-shadow */
             const context = window[namespc].createContext(ctxOpts);
-            context.extras = extras;
+            context.extras = ext;
 
             const output = {};
             try {
