@@ -304,6 +304,11 @@ class CrawlerSetup {
             },
         };
 
+        const extras = {
+            $cheerio,
+            fetch
+        };
+
         /**
          * USER FUNCTION EXECUTION
          */
@@ -311,12 +316,10 @@ class CrawlerSetup {
         const startUserFn = process.hrtime();
 
         const namespace = pageContext.apifyNamespace;
-        const output = await page.evaluate(async (ctxOpts, namespc) => {
+        const output = await page.evaluate(async (ctxOpts, namespc, extras) => {
             /* eslint-disable no-shadow */
             const context = window[namespc].createContext(ctxOpts);
-            
-            context.$cheerio = $cheerio;
-            context.fetch = fetch;
+            context.extras = extras;
 
             const output = {};
             try {
@@ -349,7 +352,7 @@ class CrawlerSetup {
             }
 
             return replaceAllDatesInObjectWithISOStrings(output);
-        }, contextOptions, namespace);
+        }, contextOptions, namespace, extras);
 
         tools.logPerformance(request, 'handlePageFunction USER FUNCTION', startUserFn);
         const finishUserFn = process.hrtime();
