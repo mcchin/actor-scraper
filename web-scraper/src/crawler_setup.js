@@ -1,6 +1,7 @@
 const Apify = require('apify');
 const _ = require('underscore');
 const fetch = require('@zeit/fetch-retry')(require('node-fetch'));
+const cheerio = require('cheerio');
 
 const contentType = require('content-type');
 const {
@@ -307,14 +308,12 @@ class CrawlerSetup {
             /* eslint-disable no-shadow */
             const context = window[namespc].createContext(ctxOpts);
             
-            context.cheerio = function(html) {
-                const myCheerio = require('cheerio');
-                return myCheerio.load(html, {
+            if (this.input.RSS) {
+                context.cheerio = cheerio.load(document.body.textContent, {
                     normalizeWhitespace: true,
                     xmlMode: true
                 });                
-            };
-            context.ggg = document.body.textContent;
+            }
             context.fetch = fetch;
 
             const output = {};

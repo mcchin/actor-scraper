@@ -97,6 +97,12 @@
             "description": "Scraper will download CSS stylesheets. Disabling this may speed up the scrape, but certain websites could stop working correctly.",
             "default": true
         },
+        "RSS": {
+            "title": "Process as RSS / XML",
+            "type": "boolean",
+            "description": "If true if will return cheerio parsed object via context at pageFunction",
+            "default": false
+        },        
         "maxRequestRetries": {
             "title": "Max request retries",
             "type": "integer",
