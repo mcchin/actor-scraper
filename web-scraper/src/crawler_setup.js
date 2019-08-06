@@ -281,6 +281,13 @@ class CrawlerSetup {
         if (aborted) return;
 
         // Setup Context and pass the configuration down to Browser.
+        let $cheerio = '';
+        if ( this.input.RSS && response && response.text() ) {
+            cheerio = cheerio.load(response.text(), {
+                normalizeWhitespace: true,
+                xmlMode: true
+            });
+        }        
         const contextOptions = {
             crawlerSetup: Object.assign(
                 _.pick(this, ['rawInput', 'env']),
@@ -293,7 +300,6 @@ class CrawlerSetup {
                 response: {
                     status: response && response.status(),
                     headers: response && response.headers(),
-                    kkk: Object.keys(response)
                 },
             },
         };
@@ -309,12 +315,7 @@ class CrawlerSetup {
             /* eslint-disable no-shadow */
             const context = window[namespc].createContext(ctxOpts);
             
-            // if (this.input.RSS) {
-            //     context.cheerio = cheerio.load(document.body.textContent, {
-            //         normalizeWhitespace: true,
-            //         xmlMode: true
-            //     });                
-            // }
+            context.$cheerio = $cheerio;
             context.fetch = fetch;
 
             const output = {};
