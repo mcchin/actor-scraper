@@ -307,6 +307,13 @@ class CrawlerSetup {
         const output = await page.evaluate(async (ctxOpts, namespc) => {
             /* eslint-disable no-shadow */
             const context = window[namespc].createContext(ctxOpts);
+
+            /* Expose custom package to pageFunction */            
+            context.customLibrary = {
+                fetch,
+                cheerio
+            };
+
             const output = {};
             try {
                 output.pageFunctionResult = await window[namespc].pageFunction(context);
