@@ -73,7 +73,6 @@ class CrawlerSetup {
          * @type {Input}
          */
         this.input = input;
-        this.xxx = 'xxx';
         this.env = Apify.getEnv();
 
         // Validations
@@ -270,7 +269,6 @@ class CrawlerSetup {
         const start = process.hrtime();
 
         const pageContext = this.pageContexts.get(page);
-        const zzz = 'zzz';
         /**
          * PRE-PROCESSING
          */
@@ -291,6 +289,8 @@ class CrawlerSetup {
             ),
             browserHandles: pageContext.browserHandles,
             pageFunctionArguments: {
+                xxx: 'ggg',
+                xfetch: fetch,
                 request,
                 response: {
                     status: response && response.status(),
