@@ -1,5 +1,7 @@
 const Apify = require('apify');
 const _ = require('underscore');
+const fetch = require('@zeit/fetch-retry')(require('node-fetch'));
+
 const {
     tools,
     createContext,
@@ -210,6 +212,8 @@ class CrawlerSetup {
             ),
             pageFunctionArguments: {
                 $,
+                _,
+                fetch,
                 html,
                 autoscaledPool,
                 request,
