@@ -314,7 +314,7 @@ class CrawlerSetup {
                     xmlMode: true
                 });                
             };
-            context.ggg = document.body.innerHTML;
+            context.ggg = document.body.textContent;
             context.fetch = fetch;
 
             const output = {};
