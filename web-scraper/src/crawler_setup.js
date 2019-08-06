@@ -293,9 +293,6 @@ class CrawlerSetup {
                 response: {
                     status: response && response.status(),
                     headers: response && response.headers(),
-                    cheerio,
-                    fetch,
-                    xxx: 'ggg'
                 },
             },
         };
@@ -310,8 +307,11 @@ class CrawlerSetup {
         const output = await page.evaluate(async (ctxOpts, namespc) => {
             /* eslint-disable no-shadow */
             const context = window[namespc].createContext(ctxOpts);
-            context.iii = 'fff';
-            context.iii2 = fetch;
+
+            /* Expose custom package to pageFunction */            
+            context.fetch = fetch;
+            context.cheerio = cheerio;
+
             const output = {};
             try {
                 output.pageFunctionResult = await window[namespc].pageFunction(context);
