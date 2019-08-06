@@ -283,7 +283,7 @@ class CrawlerSetup {
         // Setup Context and pass the configuration down to Browser.
         let $cheerio = '';
         if ( this.input.RSS && response && response.text() ) {
-            cheerio = cheerio.load(response.text(), {
+            $cheerio = cheerio.load(response.text(), {
                 normalizeWhitespace: true,
                 xmlMode: true
             });
