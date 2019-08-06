@@ -287,8 +287,8 @@ class CrawlerSetup {
             crawlerSetup: Object.assign(
                 _.pick(this, ['rawInput', 'env']),
                 _.pick(this.input, ['customData', 'useRequestQueue', 'injectJQuery', 'injectUnderscore']),
-                fetch,
-                cheerio,
+                { fetch },
+                { cheerio },
                 { META_KEY },
             ),
             browserHandles: pageContext.browserHandles,
