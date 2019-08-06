@@ -308,8 +308,13 @@ class CrawlerSetup {
             /* eslint-disable no-shadow */
             const context = window[namespc].createContext(ctxOpts);
             
-            context.iii = cheerio;
-            context.iii2 = fetch;
+            context.cheerio = function(html) {
+                return cheerio.load(html, {
+                    normalizeWhitespace: true,
+                    xmlMode: true
+                });                
+            };
+            context.fetch = fetch;
 
             const output = {};
             try {
