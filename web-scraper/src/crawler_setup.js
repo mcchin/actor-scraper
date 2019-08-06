@@ -1,5 +1,8 @@
 const Apify = require('apify');
 const _ = require('underscore');
+const fetch = require('@zeit/fetch-retry')(require('node-fetch'));
+const cheerio = require('cheerio');
+
 const contentType = require('content-type');
 const {
     tools,
@@ -288,6 +291,9 @@ class CrawlerSetup {
             ),
             browserHandles: pageContext.browserHandles,
             pageFunctionArguments: {
+                _,
+                fetch,
+                cheerio,
                 request,
                 response: {
                     status: response && response.status(),

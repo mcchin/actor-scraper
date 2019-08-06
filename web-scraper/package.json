@@ -5,8 +5,11 @@
   "main": "src/main.js",
   "dependencies": {
     "@apify/scraper-tools": "^0.1.2",
+    "@zeit/fetch-retry": "^4.0.1",
     "apify": "^0.15.3",
+    "cheerio": "^1.0.0-rc.3",
     "content-type": "^1.0.4",
+    "node-fetch": "^2.6.0",
     "underscore": "^1.9.1"
   },
   "devDependencies": {
