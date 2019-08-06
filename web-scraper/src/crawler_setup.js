@@ -309,8 +309,10 @@ class CrawlerSetup {
             const context = window[namespc].createContext(ctxOpts);
 
             /* Expose custom package to pageFunction */            
-            context.fetch = fetch;
-            context.cheerio = cheerio;
+            context.customLibrary = {
+                fetch,
+                cheerio
+            };
 
             const output = {};
             try {
