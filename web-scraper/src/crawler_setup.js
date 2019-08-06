@@ -293,6 +293,7 @@ class CrawlerSetup {
                 response: {
                     status: response && response.status(),
                     headers: response && response.headers(),
+                    kkk: Object.keys(response)
                 },
             },
         };
@@ -308,12 +309,12 @@ class CrawlerSetup {
             /* eslint-disable no-shadow */
             const context = window[namespc].createContext(ctxOpts);
             
-            if (this.input.RSS) {
-                context.cheerio = cheerio.load(document.body.textContent, {
-                    normalizeWhitespace: true,
-                    xmlMode: true
-                });                
-            }
+            // if (this.input.RSS) {
+            //     context.cheerio = cheerio.load(document.body.textContent, {
+            //         normalizeWhitespace: true,
+            //         xmlMode: true
+            //     });                
+            // }
             context.fetch = fetch;
 
             const output = {};
