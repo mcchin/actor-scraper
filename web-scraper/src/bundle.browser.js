@@ -117,7 +117,7 @@ module.exports = (apifyNamespace) => {
                 this.skipLinks = this.skipLinks.bind(this);
                 this.enqueueRequest = this.enqueueRequest.bind(this);
                 this.waitFor = this.waitFor.bind(this);
-                this.moment = moment;
+                this.test = 'sss';
             }
 
             async getValue(...args) {
