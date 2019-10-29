@@ -295,6 +295,7 @@ class CrawlerSetup {
                     headers: response && response.headers(),
                 },
             },
+            moment
         };
 
         /**
@@ -489,7 +490,6 @@ class CrawlerSetup {
             globalStore,
             log: logHandle,
             apify,
-            moment,
         };
         if (requestQueue) handles.requestQueue = requestQueue;
         return handles;
