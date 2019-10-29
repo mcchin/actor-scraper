@@ -296,7 +296,6 @@ class CrawlerSetup {
                     headers: response && response.headers(),
                 },
             },
-            moment
         };
 
         /**
@@ -306,6 +305,9 @@ class CrawlerSetup {
         const startUserFn = process.hrtime();
 
         const namespace = pageContext.apifyNamespace;
+        await page.exposeFunction('_moment', () =>
+            moment
+        );        
         const output = await page.evaluate(async (ctxOpts, namespc) => {
             /* eslint-disable no-shadow */
             const context = window[namespc].createContext(ctxOpts);
