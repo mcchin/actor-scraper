@@ -305,8 +305,8 @@ class CrawlerSetup {
         const startUserFn = process.hrtime();
 
         const namespace = pageContext.apifyNamespace;
-        await page.exposeFunction('_moment', () =>
-            moment
+        await page.exposeFunction('_moment_ago', (value, type) =>
+            moment().subtract(value, type).toISOString()
         );        
         const output = await page.evaluate(async (ctxOpts, namespc) => {
             /* eslint-disable no-shadow */
