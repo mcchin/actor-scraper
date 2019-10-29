@@ -10,6 +10,7 @@ const {
 const GlobalStore = require('./global_store');
 const createBundle = require('./bundle.browser');
 const SCHEMA = require('../INPUT_SCHEMA');
+const moment = require('moment');
 
 const { utils: { log, puppeteer } } = Apify;
 
@@ -488,6 +489,7 @@ class CrawlerSetup {
             globalStore,
             log: logHandle,
             apify,
+            moment,
         };
         if (requestQueue) handles.requestQueue = requestQueue;
         return handles;
