@@ -3,9 +3,6 @@
  * Command to be evaluated for Browser side code injection.
  * @param apifyNamespace
  */
-
-const moment = require('moment');
-
 module.exports = (apifyNamespace) => {
     (function (global, namespace) {
         if (typeof window[namespace] !== 'object') window[namespace] = {};
@@ -117,7 +114,7 @@ module.exports = (apifyNamespace) => {
                 this.skipLinks = this.skipLinks.bind(this);
                 this.enqueueRequest = this.enqueueRequest.bind(this);
                 this.waitFor = this.waitFor.bind(this);
-                this.test = 'sss';
+                this.moment = require('moment');
             }
 
             async getValue(...args) {
