@@ -13,6 +13,8 @@ const SCHEMA = require('../INPUT_SCHEMA');
 
 const { utils: { log, puppeteer } } = Apify;
 
+const moment = require('moment');
+
 /**
  * Replicates the INPUT_SCHEMA with JavaScript types for quick reference
  * and IDE type check integration.
@@ -294,6 +296,7 @@ class CrawlerSetup {
                     headers: response && response.headers(),
                 },
             },
+            moment
         };
 
         /**

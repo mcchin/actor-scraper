@@ -70,6 +70,7 @@ module.exports = (apifyNamespace) => {
                     crawlerSetup,
                     browserHandles,
                     pageFunctionArguments,
+                    moment
                 } = options;
 
                 const createProxy = global[namespace].createNodeProxy;
@@ -114,7 +115,7 @@ module.exports = (apifyNamespace) => {
                 this.skipLinks = this.skipLinks.bind(this);
                 this.enqueueRequest = this.enqueueRequest.bind(this);
                 this.waitFor = this.waitFor.bind(this);
-                this.moment = require('moment');
+                this.moment = moment;
             }
 
             async getValue(...args) {
