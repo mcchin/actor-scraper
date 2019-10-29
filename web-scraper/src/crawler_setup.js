@@ -1,8 +1,5 @@
 const Apify = require('apify');
 const _ = require('underscore');
-const fetch = require('@zeit/fetch-retry')(require('node-fetch'));
-// const cheerio = require('cheerio');
-
 const contentType = require('content-type');
 const {
     tools,
@@ -13,6 +10,7 @@ const {
 const GlobalStore = require('./global_store');
 const createBundle = require('./bundle.browser');
 const SCHEMA = require('../INPUT_SCHEMA');
+
 const { utils: { log, puppeteer } } = Apify;
 
 /**
@@ -269,6 +267,7 @@ class CrawlerSetup {
         const start = process.hrtime();
 
         const pageContext = this.pageContexts.get(page);
+
         /**
          * PRE-PROCESSING
          */
@@ -281,14 +280,6 @@ class CrawlerSetup {
         if (aborted) return;
 
         // Setup Context and pass the configuration down to Browser.
-        // let $cheerio = '';
-        // if ( this.input.RSS && response && response.text() ) {
-        //     $cheerio = cheerio.load(response.text(), {
-        //         normalizeWhitespace: true,
-        //         xmlMode: true
-        //     });
-        // }
-
         const contextOptions = {
             crawlerSetup: Object.assign(
                 _.pick(this, ['rawInput', 'env']),
@@ -301,15 +292,9 @@ class CrawlerSetup {
                 response: {
                     status: response && response.status(),
                     headers: response && response.headers(),
-                    raw: response && response.text(),
                 },
             },
         };
-
-        // const extras = {
-        //     $cheerio,
-        //     fetch
-        // };
 
         /**
          * USER FUNCTION EXECUTION
@@ -321,7 +306,6 @@ class CrawlerSetup {
         const output = await page.evaluate(async (ctxOpts, namespc) => {
             /* eslint-disable no-shadow */
             const context = window[namespc].createContext(ctxOpts);
-
             const output = {};
             try {
                 output.pageFunctionResult = await window[namespc].pageFunction(context);
